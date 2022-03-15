@@ -41,8 +41,10 @@ index =  np.arange(0) # array of numbers for the number of samples
 logfile = pd.DataFrame(columns=columns, index=index)
 
 #Define stimuli 
-words = pd.read_csv(stimulus_path, sep=",",header=None)
+words = pd.read_csv(stimulus_path, sep=",")
 stimuli = [w for w in words.iloc[:,1]]
+random10 = random.choices(stimuli, k=10)
+stimuli = stimuli + random10
 random.shuffle(stimuli)
 
 practice_stimuli = ['cow','water','box','airplane','drawing','mountain']
@@ -172,9 +174,10 @@ show_info2("Please wait for the experiment to start.")
 event.waitKeys(keyList=['q','t'])
 stopwatch.reset()
 
-#trials_total = len(stimuli)
-trials_total = 15
-trials_block = 5
+trials_total = len(stimuli)
+trials_block = int(trials_total/3)
+#trials_total = 15
+#trials_block = 5
 
 for k in range(0,trials_block):
     choices, rand_ind = choices_option()    
