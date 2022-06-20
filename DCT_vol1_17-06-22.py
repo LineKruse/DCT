@@ -40,10 +40,37 @@ columns = ['ID', 'Age', 'Gender', 'trial','word','choice','response','rt', 'choi
 index =  np.arange(0) # array of numbers for the number of samples
 logfile = pd.DataFrame(columns=columns, index=index)
 
+#Load stimuli 
+words = pd.read_csv(stimulus_path, sep=",")
+words = [w for w in words.loc[:,'word']]
+# stimuli = [w for w in words.iloc[:,1]]
+# random.shuffle(stimuli)
+
+#Find 10 words at random to be repeated (differs for each participant)
+random10 = random.choices(words, k=10)
+
+#Find index in word list of placeholders (rep1, rep2, rep3, etc.)
+reps = [words.index(l) for l in words if l.startswith('rep')]
+
+#Replace placeholders with the 10 words to be repeated 
+words[reps[0]] = random10[0]
+words[reps[1]] = random10[1]
+words[reps[2]] = random10[2]
+words[reps[3]] = random10[3]
+words[reps[4]] = random10[4]
+words[reps[5]] = random10[5]
+words[reps[6]] = random10[6]
+words[reps[7]] = random10[7]
+words[reps[8]] = random10[8]
+words[reps[9]] = random10[9]
+
+stimuli = words
+
+
+#Add the random 10 rep words to list (placeholders: "rep1", "rep2", "rep3", etc.)
+
 #Define stimuli 
 # words = pd.read_csv(stimulus_path, sep=",")
-
-# random10 = random.choices(words.iloc[:,0], k=10)
 
 # words.columns = ['word','groups']
 # c1 = [w for w in words.loc[words['groups'] == 1, 'word']]
@@ -61,17 +88,17 @@ logfile = pd.DataFrame(columns=columns, index=index)
 # c13 = [w for w in words.loc[words['groups'] == 13, 'word']]
 # c14 = [w for w in words.loc[words['groups'] == 14, 'word']]
 # c15 = [w for w in words.loc[words['groups'] == 15, 'word']]
-# c16 = random10
+# c16 = ['rep1','rep2','rep3','rep4','rep5','rep6','rep7','rep8','rep9','rep10']
 # c1.append('depression')
 # c8.append('woman')
 # c8.append('man')
 
 # lists = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16]
 
-# # seq = []
-# # for i in range(0,15): 
-# #     seq.append([i]*len(lists[i]))
-# # seq1 = [x for xs in seq for x in xs]
+# # # seq = []
+# # # for i in range(0,15): 
+# # #     seq.append([i]*len(lists[i]))
+# # # seq1 = [x for xs in seq for x in xs]
 
 # group_order = [1,0,3,9,11,7,8,6,12,14,13,2,5,10,4,1,0,3,9,11,7,8,6,12,14,13,2,5,10,15,4,1,0,3,9,11,
 # 7,8,6,12,14,13,2,5,10,4,1,0,3,9,11,7,8,6,12,14,13,2,5,15,10,4,1,0,3,9,11,7,8,6,12,14,13,2,5,10,4,1,
@@ -91,19 +118,12 @@ logfile = pd.DataFrame(columns=columns, index=index)
 #     lists[num].remove(word)
 
 
-# dict = {'sem_group': group_order, 'word': word_list}  
+#dict = {'sem_group': group_order, 'word': word_list}  
        
-# df = pd.DataFrame(dict) 
+#df = pd.DataFrame(dict) 
     
-# saving the dataframe 
-#df.to_csv('pseudorandomized_stimuli_list.csv')
-
-
-#Load stimuli 
-words = pd.read_csv(stimulus_path, sep=",")
-stimuli = [w for w in words.loc[:,'word']]
-# stimuli = [w for w in words.iloc[:,1]]
-# random.shuffle(stimuli)
+# #saving the dataframe 
+#df.to_csv(stimulus_path)
 
 
 #practice_stimuli = ['cow','water','box','airplane','drawing','mountain']
