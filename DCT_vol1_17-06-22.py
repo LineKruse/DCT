@@ -1,7 +1,7 @@
 import os
 from pickle import TRUE
 dir = os.getcwd()
-stimulus_path = dir + "/wordslist_clusters.csv"
+stimulus_path = dir + "/pseudorandomized_stimuli_list.csv"
 
 #import ppc
 import psychopy
@@ -41,57 +41,67 @@ index =  np.arange(0) # array of numbers for the number of samples
 logfile = pd.DataFrame(columns=columns, index=index)
 
 #Define stimuli 
+# words = pd.read_csv(stimulus_path, sep=",")
+
+# random10 = random.choices(words.iloc[:,0], k=10)
+
+# words.columns = ['word','groups']
+# c1 = [w for w in words.loc[words['groups'] == 1, 'word']]
+# c2 = [w for w in words.loc[words['groups'] == 2, 'word']]
+# c3 = [w for w in words.loc[words['groups'] == 3, 'word']]
+# c4 = [w for w in words.loc[words['groups'] == 4, 'word']]
+# c5 = [w for w in words.loc[words['groups'] == 5, 'word']]
+# c6 = [w for w in words.loc[words['groups'] == 6, 'word']]
+# c7 = [w for w in words.loc[words['groups'] == 7, 'word']]
+# c8 = [w for w in words.loc[words['groups'] == 8, 'word']]
+# c9 = [w for w in words.loc[words['groups'] == 9, 'word']]
+# c10 = [w for w in words.loc[words['groups'] == 10, 'word']]
+# c11 = [w for w in words.loc[words['groups'] == 11, 'word']]
+# c12 = [w for w in words.loc[words['groups'] == 12, 'word']]
+# c13 = [w for w in words.loc[words['groups'] == 13, 'word']]
+# c14 = [w for w in words.loc[words['groups'] == 14, 'word']]
+# c15 = [w for w in words.loc[words['groups'] == 15, 'word']]
+# c16 = random10
+# c1.append('depression')
+# c8.append('woman')
+# c8.append('man')
+
+# lists = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16]
+
+# # seq = []
+# # for i in range(0,15): 
+# #     seq.append([i]*len(lists[i]))
+# # seq1 = [x for xs in seq for x in xs]
+
+# group_order = [1,0,3,9,11,7,8,6,12,14,13,2,5,10,4,1,0,3,9,11,7,8,6,12,14,13,2,5,10,15,4,1,0,3,9,11,
+# 7,8,6,12,14,13,2,5,10,4,1,0,3,9,11,7,8,6,12,14,13,2,5,15,10,4,1,0,3,9,11,7,8,6,12,14,13,2,5,10,4,1,
+# 0,3,9,11,7,8,0,6,12,14,13,15,2,5,10,4,1,0,3,9,11,7,8,6,12,14,13,2,5,10,1,0,3,9,11,7,8,6,12,14,13,15,2,5,
+# 10,1,0,3,9,11,7,8,6,12,14,13,2,5,10,1,0,3,9,11,7,8,6,12,14,13,2,15,5,10,1,0,3,9,11,7,8,6,12,14,13,
+# 2,5,1,0,3,9,11,7,8,6,12,14,13,2,1,0,15,3,9,11,7,8,6,12,14,13,2,1,0,3,9,11,7,8,6,12,14,13,1,0,3,9,
+# 11,7,8,6,15,12,14,1,0,3,9,11,7,8,6,1,0,3,9,11,7,8,6,1,0,3,9,11,7,8,1,0,3,9,15,11,7,1,0,3,9,11,7,1,0,
+# 3,9,11,7,1,0,3,9,11,1,0,3,9,11,1,0,3,7,9,15,11,1,0,3,9,11,1,0,3,9,1,0,3,9,1,0,3,9,1,7,0,3,1,0,3,1,0,3,
+# 1,0,15,1,1]
+
+# #Sample words randomly from the groups according to the group order 
+# word_list = []
+# for num in group_order: 
+#     g = lists[num]
+#     word = random.choice(g)
+#     word_list.append(word)
+#     lists[num].remove(word)
+
+
+# dict = {'sem_group': group_order, 'word': word_list}  
+       
+# df = pd.DataFrame(dict) 
+    
+# saving the dataframe 
+#df.to_csv('pseudorandomized_stimuli_list.csv')
+
+
+#Load stimuli 
 words = pd.read_csv(stimulus_path, sep=",")
-
-random10 = random.choices(words.iloc[:,0], k=10)
-
-words.columns = ['word','groups']
-c1 = [w for w in words.loc[words['groups'] == 1, 'word']]
-c2 = [w for w in words.loc[words['groups'] == 2, 'word']]
-c3 = [w for w in words.loc[words['groups'] == 3, 'word']]
-c4 = [w for w in words.loc[words['groups'] == 4, 'word']]
-c5 = [w for w in words.loc[words['groups'] == 5, 'word']]
-c6 = [w for w in words.loc[words['groups'] == 6, 'word']]
-c7 = [w for w in words.loc[words['groups'] == 7, 'word']]
-c8 = [w for w in words.loc[words['groups'] == 8, 'word']]
-c9 = [w for w in words.loc[words['groups'] == 9, 'word']]
-c10 = [w for w in words.loc[words['groups'] == 10, 'word']]
-c11 = [w for w in words.loc[words['groups'] == 11, 'word']]
-c12 = [w for w in words.loc[words['groups'] == 12, 'word']]
-c13 = [w for w in words.loc[words['groups'] == 13, 'word']]
-c14 = [w for w in words.loc[words['groups'] == 14, 'word']]
-c15 = [w for w in words.loc[words['groups'] == 15, 'word']]
-c16 = random10
-c1.append('depression')
-c8.append('woman')
-c8.append('man')
-
-lists = [c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15, c16]
-
-# seq = []
-# for i in range(0,15): 
-#     seq.append([i]*len(lists[i]))
-# seq1 = [x for xs in seq for x in xs]
-
-group_order = [1,0,3,9,11,7,8,6,12,14,13,2,5,10,4,1,0,3,9,11,7,8,6,12,14,13,2,5,10,15,4,1,0,3,9,11,
-7,8,6,12,14,13,2,5,10,4,1,0,3,9,11,7,8,6,12,14,13,2,5,15,10,4,1,0,3,9,11,7,8,6,12,14,13,2,5,10,4,1,
-0,3,9,11,7,8,0,6,12,14,13,15,2,5,10,4,1,0,3,9,11,7,8,6,12,14,13,2,5,10,1,0,3,9,11,7,8,6,12,14,13,15,2,5,
-10,1,0,3,9,11,7,8,6,12,14,13,2,5,10,1,0,3,9,11,7,8,6,12,14,13,2,15,5,10,1,0,3,9,11,7,8,6,12,14,13,
-2,5,1,0,3,9,11,7,8,6,12,14,13,2,1,0,15,3,9,11,7,8,6,12,14,13,2,1,0,3,9,11,7,8,6,12,14,13,1,0,3,9,
-11,7,8,6,15,12,14,1,0,3,9,11,7,8,6,1,0,3,9,11,7,8,6,1,0,3,9,11,7,8,1,0,3,9,15,11,7,1,0,3,9,11,7,1,0,
-3,9,11,7,1,0,3,9,11,1,0,3,9,11,1,0,3,7,9,15,11,1,0,3,9,11,1,0,3,9,1,0,3,9,1,0,3,9,1,7,0,3,1,0,3,1,0,3,
-1,0,15,1,1]
-
-#Sample words randomly from the groups according to the group order 
-word_list = []
-for num in group_order: 
-    g = lists[num]
-    word = random.choice(g)
-    word_list.append(word)
-    lists[num].remove(word)
-
-
-stimuli = word_list
+stimuli = [w for w in words.loc[:,'word']]
 # stimuli = [w for w in words.iloc[:,1]]
 # random.shuffle(stimuli)
 
