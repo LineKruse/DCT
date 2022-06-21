@@ -30,7 +30,8 @@ else:
 
 #Define window
 #win = visual.Window(fullscr=True, color='black')
-win = visual.Window((1000,800), color='black')
+#win = visual.Window((1000,800), color='black')
+win = visual.Window(fullscr=True, color='black')
 
 #Define stopwatch
 stopwatch=core.Clock()
@@ -242,8 +243,9 @@ def trial(k, choices, rand_ind, block, first):
 
 #Run test 
 filename = ID +'.csv'
-#output_file = os.path.join(path, filename)
-logfile.to_csv(filename, index=False) 
+path = 'data/'
+output_file = os.path.join(path, filename)
+logfile.to_csv(output_file, index=False) 
 
 show_info("Thank you for participating in our short survey on lexical choice in demonstrative reference. \nIn what follows, you will be presented with a series of words, and asked to match them with either 'this' or 'that'. \nThere is no specific rule to follow: just make your choice based on your first and immediate preference. \nUse the left and right button to indicate your choice. \nNotice that the position of 'this' and 'that' response buttons changes randomly.")
 
@@ -260,29 +262,31 @@ trials_block = int(trials_total/3)
 for k in range(0,trials_block):
     choices, rand_ind = choices_option()    
     logfile = logfile.append(trial(k,choices, rand_ind, block=1, first=0))
-    logfile.to_csv(filename, index=False)
+    logfile.to_csv(output_file, index=False)
 
 show_info("Great job! \nYou have now completed the first block of the experiment \nTake a break and wait for instructions from the experimenter.")
 
 #Block 2 
+event.waitKeys(keyList=['q','z'])
 show_info2("Please wait for the experiment to start.")
 event.waitKeys(keyList=['q','t'])
 stopwatch.reset()
 for k in range(trials_block,trials_block*2):
     choices, rand_ind = choices_option()    
     logfile = logfile.append(trial(k,choices, rand_ind, block=2, first=trials_block))
-    logfile.to_csv(filename, index=False)
+    logfile.to_csv(output_file, index=False)
 
 show_info("Great job! \nYou have now completed the second block of the experiment \nTake a break and wait for instructions from the experimenter.")
 
 #Blcok 3
+event.waitKeys(keyList=['q','z'])
 show_info2("Please wait for the experiment to start.")
 event.waitKeys(keyList=['q','t'])
 stopwatch.reset()
 for k in range(trials_block*2,trials_total):
     choices, rand_ind = choices_option()    
     logfile = logfile.append(trial(k,choices, rand_ind, block=3, first=trials_block*2))
-    logfile.to_csv(filename, index=False)
+    logfile.to_csv(output_file, index=False)
 
 show_info("Well done \nYou have now completed the experiment \nPlease wait for instructions from the experimenter.")
 
